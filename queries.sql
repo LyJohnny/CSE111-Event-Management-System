@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS Status (
     s_title VARCHAR(255) NOT NULL,
     s_draft BOOLEAN NOT NULL,
     s_open BOOLEAN NOT NULL,
-    s_ongoing BOOLEAN NOT NULL,
-    s_cancelled BOOLEAN NOT NULL
+    s_ongoing BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Groups (
