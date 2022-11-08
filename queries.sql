@@ -167,12 +167,12 @@ SELECT r_title, strftime('%Y-%m-%d', Reminders.r_date) as "Date"
 FROM Reminders
 WHERE Date > strftime('%Y-%m-%d', '2022-11-17');
 
---7 Print all meetings created by users that created events 
-SELECT DISTINCT m_title 
+--#7 Print all meetings created by users that created events (Which events have meeting links)
+SELECT DISTINCT m_userid, m_title 
 FROM Meetings
 INNER JOIN Users on Meetings.m_userid = Users.u_id
 INNER JOIN Events on Users.u_id = Events.e_userid
-ORDER BY m_title; 
+ORDER BY Users.u_id; 
 
 --8 Print all users that created High priority Reminders 
 SELECT DISTINCT u_firstname, u_lastname
@@ -180,14 +180,14 @@ FROM Users
 INNER JOIN Reminders on Reminders.r_userid = Users.u_id
 WHERE Reminders.r_priority = 'High';
 
---9 Print all open events that belong to the "Personal" group calendar
+--9 Print all open events that belong to the "Personal" calendar group
 SELECT e_title
 FROM Events
 INNER JOIN Groups on Groups.g_id = Events.e_groupid
 INNER JOIN Status on Status.s_title = Events.e_title 
 WHERE Status.s_open = TRUE AND Events.e_groupid = 1; 
 
---10 Print all recurring events created by users that created events in group 1 
+--#10 Print all recurring events created by users that created events in the "Personal" calendar group (Which events are recurring in their Personal calendar group)
 SELECT Events.e_title, Users.u_firstname, Users.u_lastname
 FROM Events 
 INNER JOIN Users on Events.e_userid = Users.u_id
