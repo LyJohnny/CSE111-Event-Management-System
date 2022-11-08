@@ -55,6 +55,20 @@ INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Dinner', 'dinner with friend', 'Cheesecake Factory', 'Jack', 3, 4);
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'lunch with coworker', 'Poke', 'Travis', 4, 4);
 
+-- New Events
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Kickback party', 'Hosted by Key Club', 'Johns House', 'Drake', 2, 7);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Car Meetup', 'All types of cars welcomed', 'Panda Express Parking Lot', 'Lebron', 4, 10);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Speech and Debate seminar', 'Discussing education system', 'COB2 140', 'Lalisa', 2, 8);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Cocos Birthday Party', 'BBQ and Pool party', 'Downtown Penthouse', 'Drizzy', 1, 9);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Skydiving', 'Going over the Grand Canyon', 'Arizona', 'Shaq', 2, 5);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Soccer', 'Practice with the boys', 'East Field', 'Mario', 1, 2);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'Buy One Get One Free', 'Dominos Pizza', 'Drake', 3, 2);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Basketball Game', 'live', 'School Playground', 'Obama', 4, 3);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Brunch', 'Pancakes and Waffles', 'IHOP', 'Lalisa', 4, 8);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Coffee Break', 'Catch up with Jim', 'Coffee Bean', 'Drizzy', 3, 4);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Deadlift Time', '20 Reps 3 Sets', 'Gym', 'Parker', 2, 7);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'Trying new restaurant', 'Olive Garden', 'Travis', 1, 2);
+
 UPDATE Events
 SET e_title = 'Dinner with Jack' 
 WHERE e_groupid = 5 AND e_userid = 4;
@@ -82,6 +96,16 @@ INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priorit
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (3, 'Code Review', 'Team code review', TRUE, 'Medium', '2022-11-15 10:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (5, 'Product Launch', 'Watch Party', FALSE, 'High', '2022-11-26 09:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (4, 'Meeting', 'Team meeting', TRUE, 'High', '2022-12-05 11:00');
+
+-- New Reminders
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (5, 'Trash Day', 'Take out trash and recycle', TRUE, 'High', '2022-12-17 9:00');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (3, 'Cleanup', 'Clean kitchen and bathroom', TRUE, 'Medium', '2022-03-05 12:30');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (2, 'Return items', 'Target, UPS store', FALSE, 'Low', '2022-08-05 11:30');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (2, 'Stretch', 'Arm and Legs', TRUE, 'Low', '2022-12-08 12:00');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (1, 'Read 10 pages', 'Harry Potter Books', TRUE, 'Low', '2022-11-22 8:00');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (2, 'Grocery', 'Pickup eggs and milk', FALSE, 'Medium', '2022-05-07 9:00');
+
+
 
 UPDATE Reminders
 SET r_description = 'CSE 111'
