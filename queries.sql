@@ -187,7 +187,7 @@ INNER JOIN Groups on Groups.g_id = Events.e_groupid
 INNER JOIN Status on Status.s_title = Events.e_title 
 WHERE Status.s_open = TRUE AND Events.e_groupid = 1; 
 
---10 Print all recurring events created by users that created events in group 3 
+--10 Print all recurring events created by users that created events in group 1 
 SELECT Events.e_title, Users.u_firstname, Users.u_lastname
 FROM Events 
 INNER JOIN Users on Events.e_userid = Users.u_id
