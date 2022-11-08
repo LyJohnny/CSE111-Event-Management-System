@@ -194,3 +194,77 @@ INNER JOIN Users on Events.e_userid = Users.u_id
 INNER JOIN Groups on Groups.g_id = Events.e_groupid
 INNER JOIN Status on Status.s_title = Events.e_title
 WHERE Status.s_ongoing = TRUE AND Events.e_groupid = 1;
+
+
+-- #11 Find events where Travis attends and Poke is involved for lunch
+
+SELECT e_title 
+FROM 
+Events
+WHERE 
+e_attendee = 'Travis' AND e_description LIKE '%'||'lunch'||'%' AND e_location = 'Poke';
+
+
+-- #12 List all the meetings that involve 'building' in their title and sort by reverse alphabetical order
+SELECT m_title
+FROM Meetings
+WHERE
+m_title LIKE '%'||'building'||'%' 
+ORDER BY m_title DESC;
+
+
+-- #13 List all events created by people with the user ID 5 and involves Baseball. Print their full name at the end.
+SELECT e_title, u_firstname, u_lastname
+FROM
+Users
+INNER JOIN Events ON Users.u_id = Events.e_userid
+WHERE
+u_id = 5 AND e_title LIKE '%'||'Baseball'||'%';
+
+-- #14 List all the active users that have a gmail account. Print and sort by their last names alphabetically.
+
+SELECT u_id, u_lastname
+FROM
+Users
+WHERE u_isactive = 1 AND u_email LIKE '%'||'gmail.com'||'%'
+ORDER BY u_lastname ASC;
+
+-- #15 Count how many events were created by people with user ID 4. 
+SELECT COUNT(*)
+FROM 
+Events
+INNER JOIN Users ON Events.e_userid = Users.u_id
+WHERE u_id = 4;
+
+
+--16 Print the user who created reminders after 11-15-2022
+SELECT u_firstname, strftime('%Y-%m-%d', Reminders.r_date) as "Date"
+FROM Reminders
+INNER JOIN Users ON Reminders.r_userid = Users.u_id
+WHERE Date > strftime('%Y-%m-%d', '2022-11-15');
+
+--17 Print the event description with Group ID 1 where the events are open
+SELECT e_description
+FROM Events
+INNER JOIN Groups ON Groups.g_id = Events.e_groupid
+INNER JOIN Status ON Status.s_title = Events.e_title 
+WHERE Status.s_open = TRUE AND Events.e_groupid = 1; 
+
+--18 Find the user that created events that have group ID 1. Print their last name and order alphabetically.
+SELECT DISTINCT u_lastname
+FROM Users
+INNER JOIN Events on Users.u_id = Events.e_userid
+INNER JOIN Groups on Events.e_groupid = Groups.g_id
+WHERE Events.e_groupid = 1
+ORDER BY u_lastname ASC;
+
+--19 Print the events that have descriptions that include the letter D. 
+SELECT e_title
+FROM Events
+WHERE e_description LIKE '%'||'d'||'%';
+
+--20 Find the last name of who created medium priority reminders that are recurring
+SELECT DISTINCT u_lastname
+FROM Users
+INNER JOIN Reminders ON Reminders.r_userid = Users.u_id
+WHERE Reminders.r_priority = 'Medium' AND Reminders.r_recurring = TRUE;
