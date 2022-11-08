@@ -61,3 +61,41 @@ INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priorit
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (3, 'Code Review', 'Team code review', TRUE, 'Medium', '2022-11-15 10:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (5, 'Product Launch', 'Watch Party', FALSE, 'High', '2022-11-26 09:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (4, 'Meeting', 'Team meeting', TRUE, 'High', '2022-12-05 11:00');
+
+INSERT INTO Groups(g_title, g_type, g_id) VALUES ('Birthdays', 'Personal', 1);
+INSERT INTO Groups(g_title, g_type, g_id) VALUES ('Fall Schedule', 'School', 2);
+INSERT INTO Groups(g_title, g_type, g_id ) VALUES ('Company Events', 'Work', 3);
+INSERT INTO Groups(g_title, g_type, g_id ) VALUES ('Holidays', 'Other', 4);
+
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Monthly spending report', 'Sarah', 3, 'RZHX12');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Movie Night', 'Jimmy', 7, 'JSLA23');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Baking Showdown', 'Burt', 2, 'UWXM39');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Math tutoring session', 'Slappy', 1, 'MSJW98');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Charades', 'Ronald', 5, 'ZTKL43');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Book reviews', 'Tom', 4, 'RPBN42');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Project update overview','Harry', 6, 'KHJA32');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Keyboard building guide','Richard', 9, 'LMJA23');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Resume Building Workshop', 'Jessica', 8, 'HUWA39');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Drawing and Painting', 'Britney', 10, 'MFIG25');
+
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('1', 'Jack', 'Harlow', 'jharlow69@gmail.com', TRUE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('2', 'Travis', 'Scott', 'travvypatty420@yahoo.com', TRUE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('3', 'Drizzy', 'Drake', 'loverboy2000@gmail.com', TRUE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('4', '21', 'Savage', 'savage21@yahoo.com', FALSE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('5', 'Ye', 'West', 'kwest420@gmail.com', FALSE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('6', 'Lebron', 'James', 'lemickey3000@gmail.com', TRUE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('7', 'Barack', 'Obama', 'bobama420@gmail.com', FALSE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('8', 'George', 'Bush', 'gbush2008@yahoo.com', TRUE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('9', 'Dua', 'Lipa', 'dualipareal@gmail.com', FALSE);
+INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('10', 'Andrew', 'Tate', 'andrewt420@gmail.com', FALSE);
+
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Lunch With Bob', FALSE, TRUE, FALSE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Coffee With Bruce', FALSE, FALSE, TRUE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Meeting', FALSE, TRUE, TRUE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Basketball Game', FALSE, TRUE, TRUE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Baseball Game', FALSE, TRUE, TRUE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Exercise', FALSE, TRUE, FALSE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Walk', FALSE, FALSE, FALSE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Run', FALSE, FALSE, FALSE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Dinner', FALSE, FALSE, FALSE);
+INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Lunch', FALSE, TRUE, FALSE);
