@@ -55,11 +55,39 @@ INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Dinner', 'dinner with friend', 'Cheesecake Factory', 'Jack', 5, 4);
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'lunch with coworker', 'Poke', 'Travis', 5, 4);
 
+
+UPDATE Events
+SET e_description = 'Discuss startup idea',
+e_location = 'Starbucks on 5th avenue'
+WHERE
+e_title = 'Coffee With Bruce';
+
+
+UPDATE Events
+SET e_description = 'daily run to Central park',
+e_attendee = 'Jacky', e_location = 'Downtown Manhattan'
+WHERE
+e_title = 'Run';
+
+DELETE FROM Events
+WHERE e_title = 'Exercise' AND e_location = 'GYM';
+
+
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (1, 'Midterm 1', 'MATH-141', FALSE, 'High', '2022-11-17 13:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (1, 'Final Test', 'MATH-141', FALSE, 'High', '2022-12-17 15:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (3, 'Code Review', 'Team code review', TRUE, 'Medium', '2022-11-15 10:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (5, 'Product Launch', 'Watch Party', FALSE, 'High', '2022-11-26 09:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (4, 'Meeting', 'Team meeting', TRUE, 'High', '2022-12-05 11:00');
+
+UPDATE Reminders
+SET r_description = 'CSE 111'
+WHERE
+r_title = 'Final Test';
+
+UPDATE Reminders
+SET r_priority = 'Medium'
+WHERE
+r_title = 'Product Launch' AND r_description = 'Watch Party';
 
 INSERT INTO Groups(g_title, g_type, g_id) VALUES ('Birthdays', 'Personal', 1);
 INSERT INTO Groups(g_title, g_type, g_id) VALUES ('Fall Schedule', 'School', 2);
