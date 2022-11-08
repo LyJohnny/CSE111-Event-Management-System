@@ -27,3 +27,20 @@ CREATE TABLE IF NOT EXISTS Groups (
     g_title VARCHAR(255) NOT NULL,
     g_type VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS Meetings (
+    m_attendee VARCHAR(255) NOT NULL,
+    m_title VARCHAR(255) NOT NULL,
+    m_description VARCHAR(255) NOT NULL,
+    m_location VARCHAR(255) NOT NULL,
+    m_creator VARCHAR(255) NOT NULL,
+    m_link VARCHAR(255) NOT NULL
+); 
+
+CREATE TABLE IF NOT EXISTS User (
+    u_firstname VARCHAR(255) NOT NULL,
+    u_lastname VARCHAR(255) NOT NULL,
+    u_email VARCHAR(255) NOT NULL,
+    u_bio VARCHAR(255) NOT NULL,
+    u_isactive BOOLEAN NOT NULL
+);
