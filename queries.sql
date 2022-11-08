@@ -46,14 +46,18 @@ CREATE TABLE IF NOT EXISTS Users (
 
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch With Bob', 'Catch up', 'Central Park', 'Bob', 1 , 1);
 INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Coffee With Bruce', 'Catch up', 'Starbucks', 'Bruce', 1, 1);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Meeting', 'Collaboration', 'Coffee Shop', 'Heather', 5, 3);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Basketball Game', 'live', 'Home', ' ', 6, 5);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Baseball Game', 'live', 'Home', '', 6, 5);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Exercise', 'daily workout', 'Gym', ' ', 8, 6);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Walk', 'daily walk', 'Mount Fuji', ' ', 8, 6);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Run', 'daily run', 'Downtown', ' ', 4, 2);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Dinner', 'dinner with friend', 'Cheesecake Factory', 'Jack', 5, 4);
-INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'lunch with coworker', 'Poke', 'Travis', 5, 4);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Meeting', 'Collaboration', 'Coffee Shop', 'Heather', 4, 3);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Basketball Game', 'live', 'Home', ' ', 3, 5);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Baseball Game', 'live', 'Home', '', 4, 5);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Exercise', 'daily workout', 'Gym', ' ', 2, 6);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Walk', 'daily walk', 'Mount Fuji', ' ', 3, 6);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Run', 'daily run', 'Downtown', ' ', 1, 2);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Dinner', 'dinner with friend', 'Cheesecake Factory', 'Jack', 3, 4);
+INSERT INTO Events(e_title, e_description, e_location, e_attendee, e_groupid, e_userid) VALUES ('Lunch', 'lunch with coworker', 'Poke', 'Travis', 4, 4);
+
+UPDATE Events
+SET e_title = 'Dinner with Jack' 
+WHERE e_groupid = 5 AND e_userid = 4;
 
 
 UPDATE Events
@@ -74,7 +78,7 @@ WHERE e_title = 'Exercise' AND e_location = 'GYM';
 
 
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (1, 'Midterm 1', 'MATH-141', FALSE, 'High', '2022-11-17 13:00');
-INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (1, 'Final Test', 'MATH-141', FALSE, 'High', '2022-12-17 15:00');
+INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (2, 'Final Test', 'MATH-141', FALSE, 'High', '2022-12-17 15:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (3, 'Code Review', 'Team code review', TRUE, 'Medium', '2022-11-15 10:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (5, 'Product Launch', 'Watch Party', FALSE, 'High', '2022-11-26 09:00');
 INSERT INTO Reminders(r_userid, r_title, r_description,  r_recurring,  r_priority, r_date) VALUES (4, 'Meeting', 'Team meeting', TRUE, 'High', '2022-12-05 11:00');
@@ -126,3 +130,67 @@ INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Walk', FALSE, F
 INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Run', FALSE, FALSE, FALSE);
 INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Dinner', FALSE, FALSE, FALSE);
 INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Lunch', FALSE, TRUE, FALSE);
+
+--1 Print users that created events
+SELECT DISTINCT u_firstname, u_lastname
+FROM Users
+INNER JOIN Events on Users.u_id = Events.e_userid
+ORDER BY u_firstname;
+
+--2 Print events that include live sports
+SELECT e_title
+FROM Events
+WHERE e_description LIKE '%' ||'live'|| '%';
+
+--3 Print users that created reminders 
+SELECT DISTINCT u_firstname, u_lastname
+FROM Users
+INNER JOIN Reminders on Users.u_id = Reminders.r_userid
+ORDER BY u_firstname DESC;
+
+--4 Print all ongoing events that were created by Jack Harlow
+SELECT s_title
+FROM Status
+INNER JOIN Events on Status.s_title = Events.e_title
+WHERE s_ongoing = TRUE AND Events.e_userid = 1;
+
+--5 Print all users that created events that belong to the "Personal" calendar group
+SELECT DISTINCT u_firstname, u_lastname
+FROM Users
+INNER JOIN Events on Users.u_id = Events.e_userid
+INNER JOIN Groups on Events.e_groupid = Groups.g_id
+WHERE Events.e_groupid = 1
+ORDER BY u_firstname;
+
+--6 Print all reminders after 11-17-2022
+SELECT r_title, strftime('%Y-%m-%d', Reminders.r_date) as "Date"
+FROM Reminders
+WHERE Date > strftime('%Y-%m-%d', '2022-11-17');
+
+--7 Print all meetings created by users that created events 
+SELECT DISTINCT m_title 
+FROM Meetings
+INNER JOIN Users on Meetings.m_userid = Users.u_id
+INNER JOIN Events on Users.u_id = Events.e_userid
+ORDER BY m_title; 
+
+--8 Print all users that created High priority Reminders 
+SELECT DISTINCT u_firstname, u_lastname
+FROM Users
+INNER JOIN Reminders on Reminders.r_userid = Users.u_id
+WHERE Reminders.r_priority = 'High';
+
+--9 Print all open events that belong to the "Personal" group calendar
+SELECT e_title
+FROM Events
+INNER JOIN Groups on Groups.g_id = Events.e_groupid
+INNER JOIN Status on Status.s_title = Events.e_title 
+WHERE Status.s_open = TRUE AND Events.e_groupid = 1; 
+
+--10 Print all recurring events created by users that created events in group 3 
+SELECT Events.e_title, Users.u_firstname, Users.u_lastname
+FROM Events 
+INNER JOIN Users on Events.e_userid = Users.u_id
+INNER JOIN Groups on Groups.g_id = Events.e_groupid
+INNER JOIN Status on Status.s_title = Events.e_title
+WHERE Status.s_ongoing = TRUE AND Events.e_groupid = 1;
