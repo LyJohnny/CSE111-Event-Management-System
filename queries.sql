@@ -133,6 +133,18 @@ INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Keyboard bu
 INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Resume Building Workshop', 'Jessica', 8, 'HUWA39');
 INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Drawing and Painting', 'Britney', 10, 'MFIG25');
 
+-- New Meetings
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Christmas Tree Decorating', 'Sarah', 5, 'RZHX12');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Movie Night', 'Jimmy', 5, 'JSLA23');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Cooking Stir Fry', 'Burt', 5, 'UWXM39');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Bio tutoring session', 'Slappy', 7, 'MSJW98');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Skyzone Time', 'Ronald', 2, 'ZTKL43');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Computer Repair ', 'Tom', 9, 'RPBN42');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Project update overview','Harry', 8, 'KHJA32');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Karaoke Night','Richard', 9, 'LMJA23');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Interview Prep Workshop', 'Jessica', 6, 'HUWA39');
+INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Human Bingo', 'Britney', 6, 'MFIG25');
+
 INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('1', 'Jack', 'Harlow', 'jharlow69@gmail.com', TRUE);
 INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('2', 'Travis', 'Scott', 'travvypatty420@yahoo.com', TRUE);
 INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('3', 'Drizzy', 'Drake', 'loverboy2000@gmail.com', TRUE);
