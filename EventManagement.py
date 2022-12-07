@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import Error
 import json
 
+currentUserID = ''
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
@@ -38,9 +39,10 @@ def login(_conn):
         lastName = input('Enter last name: ')
         email = input('Enter email: ')
         cur.execute("""
-            INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive) VALUES (?,?,?,?)
-""", (firstName, lastName, email, True))
+                INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive) VALUES (?,?,?,?)
+                """, (firstName, lastName, email, True))
         _conn.commit()
+        currentUserID = cur.lastrowid
         print('Account Created Successfully')
     if inp == '1': 
         cur = _conn.cursor()
@@ -49,6 +51,14 @@ def login(_conn):
             SELECT u_email FROM Users;
         """
         cur.execute(sql)
+
+        cur1 = _conn.cursor()
+        cur1.execute("""
+                SELECT u_id FROM Users WHERE u_email = ?
+                """, (email,))
+        _conn.commit()
+        currentUserID = cur1.fetchone()[0]
+
         rows = cur.fetchall()
         rows = tuple(rows)
         for i in rows:
@@ -59,12 +69,23 @@ def login(_conn):
         print("login failed")
         return False
 
+def eventsList(_conn):
+    cur = _conn.cursor()
+    inp = input('Enter 0 to view or 1 to login: ')
+    sql = """
+        SELECT e_title FROM Events;
+    """
+    cur.execute(sql)
+    rows = cur.fetchall()
+
 def main():
     database = r"project.sqlite"
 
     # create a database connection
     conn = openConnection(database)
     with conn:
-        login(conn) 
+        if login(conn):
+            eventsList(conn)
+
 if __name__ == '__main__':
     main()
