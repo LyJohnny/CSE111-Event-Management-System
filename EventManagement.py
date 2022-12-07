@@ -50,7 +50,7 @@ def login(_conn):
 
     if inp == '2': 
         cur = _conn.cursor()
-        email = input('Enter login email: \n')
+        email = input('Enter login email: ')
         print('\n')
         sql = """
             SELECT u_email FROM Users;
@@ -68,29 +68,35 @@ def login(_conn):
         rows = tuple(rows)
         for i in rows:
             if email in i:
-                print('Login Success \n')
+                print('Login Success')
                 print('\n')
                 return True
 
-        print("login failed \n")
+        print("login failed")
         return False
 
 def eventManagement(_conn):
     while True:
 
         cur = _conn.cursor()
-        inp = input('Enter 1 to manage Events, Enter 2 to manage Reminders, Enter 3 to manage Meetings, Enter 4 to manage Groups: \n')
+        inp = input('Enter 1 to manage Events, Enter 2 to manage Reminders, Enter 3 to manage Meetings, Enter 4 to manage Groups: ')
         print('\n')
         if inp == '1':
-            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group: \n')
+            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group: ')
             print('\n')
             if inp1 == '1':
                 cur.execute("""
                         SELECT e_title, e_description, e_location, e_attendee FROM Events WHERE e_userid = ?
                         """, (currentUserID,)) 
                 _conn.commit()
-                print(cur.fetchall(), '\n')
-                print('\n')
+                l = '{:>10}{:>23}{:>28}{:>22}'.format('Title','Description','Location','Attendee')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+
                 continue
 
             if inp == '2':
