@@ -81,6 +81,8 @@ def eventManagement(_conn):
         cur = _conn.cursor()
         inp = input('Enter 1 to manage Events, Enter 2 to manage Reminders, Enter 3 to manage Meetings, Enter 4 to manage Groups: ')
         print('\n')
+        if inp == '0':
+            quit()
         if inp == '1':
             inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group: ')
             print('\n')
@@ -96,6 +98,8 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
                     print(l)
+                
+                print('\n')
 
                 continue
 
@@ -116,7 +120,7 @@ def eventManagement(_conn):
                 continue
 
         if inp == '2':
-            inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: \n')
+            inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: ')
             print('\n')
             cur3 = _conn.cursor()
             if inp2 == '1':
@@ -124,7 +128,14 @@ def eventManagement(_conn):
                         SELECT r_title, r_description, r_date, r_priority FROM Reminders WHERE r_userid = ?
                         """, (currentUserID,)) 
                 _conn.commit()
-                print(cur3.fetchall(), '\n')
+                l = '{:>10}{:>25}{:>25}{:>16}'.format('Title','Description','Priority','Date')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur3.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>25}{:>25}{:>14}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+                
                 print('\n')
                 continue
 
@@ -145,7 +156,7 @@ def eventManagement(_conn):
                 continue
 
         if inp == '3':
-            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: \n')
+            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
             print('\n')
             cur6 = _conn.cursor()
             if inp3 == '1':
@@ -153,7 +164,14 @@ def eventManagement(_conn):
                         SELECT m_title, m_attendee, m_link FROM Meetings WHERE m_userid = ?
                         """, (currentUserID,)) 
                 _conn.commit()
-                print(cur6.fetchall(), '\n')
+                l = '{:>10}{:>35}{:>23}'.format('Title','Attendee','Link')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur6.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}{:>25}'.format(row[0],row[1],row[2])
+                    print(l)
+                
                 print('\n')
                 continue
 
@@ -182,7 +200,14 @@ def eventManagement(_conn):
                         SELECT g_title, g_type FROM Groups
                         """)
                 _conn.commit()
-                print(cur9.fetchall(), '\n')
+                l = '{:>10}{:>30}'.format('Title','Type')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur9.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}'.format(row[0],row[1])
+                    print(l)
+                
                 print('\n')
                 continue
 
