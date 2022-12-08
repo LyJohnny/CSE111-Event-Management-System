@@ -178,7 +178,6 @@ def eventManagement(_conn):
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
-
             if inp2 == '3':
                 cur5 = _conn.cursor()
                 cur5.execute("""
@@ -186,6 +185,24 @@ def eventManagement(_conn):
                         """, (currentUserID))
                 _conn.commit()
                 continue
+
+            if inp2 == '4':
+                inp4 = input('Enter the Priority type you wish to filter your Events by: ')
+                print('\n')
+                cur14 = _conn.cursor()
+                sql = '''
+                        SELECT r_title, r_description, r_priority, r_date FROM Reminders WHERE Reminders.r_priority = ? AND Reminders.r_userid = ?
+                        ''' 
+                cur14.execute(sql, [inp4, currentUserID])
+                l = '{:>10}{:>25}{:>20}{:>16}'.format('Title','Description','Priority','Date')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur14.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>25}{:>17}{:>26}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+                
+                print('++++++++++++++++++++++++++++++++++ \n')
 
         if inp == '3':
             inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
