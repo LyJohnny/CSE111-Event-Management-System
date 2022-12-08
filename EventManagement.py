@@ -167,9 +167,10 @@ def eventManagement(_conn):
 
                 continue
 
+            # -----------------------------------------------------Reminders (inp2) --------------------------------------------------------------#
 
         if inp == '2':
-            inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: ')
+            inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority, Enter 5 to add Reminders: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             cur3 = _conn.cursor()
             if inp2 == '1':
@@ -228,6 +229,27 @@ def eventManagement(_conn):
                     print(l)
                 
                 print('++++++++++++++++++++++++++++++++++ \n')
+
+            if inp2 == '5':
+                title = input('Enter the Reminder title: \n')
+                descr = input('Enter the Reminder Description: \n')
+                recur = input('Is this a recurring reminder? (0 for No, 1 for Yes): \n')
+                priority = input('What is the priority of this reminder (low, medium or high)?: \n')
+                date = input ('Enter the date and time for the reminder (YYYY-MM-DD HH:MM): \n')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur15 = _conn.cursor()
+                sql = '''
+                        INSERT INTO Reminders (r_userid, r_title, r_description, r_recurring, r_priority, r_date)
+                        VALUES(?,?,?,?,?,?)
+                        ''' 
+                cur15.execute(sql, [currentUserID, title, descr, recur, priority, date]) 
+                _conn.commit()
+                print('New Reminder titled:',title, 'created successfully!')
+
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+            # -----------------------------------------------------Meetings (inp3) --------------------------------------------------------------#
 
         if inp == '3':
             inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
