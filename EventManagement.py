@@ -72,7 +72,7 @@ def login(_conn):
                 print('++++++++++++++++++++++++++++++++++ \n')
                 return True
 
-        print("login failed")
+        print("Login failed")
         return False
 
 def eventManagement(_conn):
@@ -85,7 +85,7 @@ def eventManagement(_conn):
             quit()
             # -----------------------------------------------------Events (inp1) --------------------------------------------------------------#
         if inp == '1':
-            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group: ')
+            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group, Enter 5 to add Events: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             if inp1 == '1':
                 cur.execute("""
@@ -143,6 +143,26 @@ def eventManagement(_conn):
                     l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
                     print(l)
                 
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
+            if inp1 == '5':
+                title = input('Enter the Event title: \n')
+                descr = input('Enter the Event Description: \n')
+                loc = input('Enter Event Location: \n')
+                attend = input('Enter any Event Attendee: \n')
+                grpId = input ('Enter a number from 1-4 for which Event Group you want to add this event to (1: Personal, 2: School, 3: Work, 4: Other): \n')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur13 = _conn.cursor()
+                sql = '''
+                        INSERT INTO Events (e_title, e_description, e_location, e_attendee, e_groupid, e_userid)
+                        VALUES(?,?,?,?,?,?)
+                        ''' 
+                cur13.execute(sql, [title, descr, loc, attend,grpId,currentUserID]) 
+                _conn.commit()
+                print('New Event titled:',title, 'created successfully!')
+
                 print('++++++++++++++++++++++++++++++++++ \n')
 
                 continue
