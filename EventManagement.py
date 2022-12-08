@@ -112,7 +112,7 @@ def eventManagement(_conn):
                         UPDATE Events SET e_title = ? WHERE e_title = ?
                         """, [inp3, inp2])
                 _conn.commit()
-                print('Event: ', inp2, 'has been updated')
+                print('Event: ', inp2, 'has been updated to: ', inp3)
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
@@ -145,12 +145,18 @@ def eventManagement(_conn):
                 continue
 
             if inp2 == '2':
+                inp1 = input('Enter the Reminder title you wish to update: ')
+                inp3 = input('Enter the updated Reminder title: ')
+                print('\n')
                 cur4 = _conn.cursor()
                 cur4.execute("""
-                        SELECT r_title FROM Reminders WHERE r_userid = ?
-                        """, (currentUserID))
+                        UPDATE Reminders SET r_title = ? WHERE r_title = ?
+                        """, [inp3, inp1])
                 _conn.commit()
+                print('Event: ', inp1, 'has been updated to: ', inp3)
+                print('++++++++++++++++++++++++++++++++++ \n')
                 continue
+
 
             if inp2 == '3':
                 cur5 = _conn.cursor()
