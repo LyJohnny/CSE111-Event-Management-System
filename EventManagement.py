@@ -126,7 +126,28 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Event: ', delEvnt)
                 continue
-            # -----------------------------------------------------Reminders (inp2) --------------------------------------------------------------#
+
+            if inp1 == '4':
+                inp2 = input('Enter the Group type you wish to filter your Events by: ')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur12 = _conn.cursor()
+                sql = '''
+                        SELECT e_title, e_description, e_location, e_attendee FROM Events INNER JOIN Groups on Groups.g_id = Events.e_groupid WHERE Groups.g_type = ? AND Events.e_userid = ?
+                        ''' 
+                cur12.execute(sql, [inp2, currentUserID]) 
+                l = '{:>10}{:>23}{:>28}{:>22}'.format('Title','Description','Location','Attendee')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur12.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+                
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
+
         if inp == '2':
             inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: ')
             print('++++++++++++++++++++++++++++++++++ \n')
@@ -160,7 +181,6 @@ def eventManagement(_conn):
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
-
             if inp2 == '3':
                 delRmdr = input('Enter the tilte of the Reminder you wish to delete: ')
                 cur5 = _conn.cursor()
@@ -170,7 +190,24 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Reminder: ', delRmdr)
                 continue
-            # -----------------------------------------------------Meetings (inp3) --------------------------------------------------------------#
+
+            if inp2 == '4':
+                inp4 = input('Enter the Priority type you wish to filter your Events by: ')
+                print('\n')
+                cur14 = _conn.cursor()
+                sql = '''
+                        SELECT r_title, r_description, r_priority, r_date FROM Reminders WHERE Reminders.r_priority = ? AND Reminders.r_userid = ?
+                        ''' 
+                cur14.execute(sql, [inp4, currentUserID])
+                l = '{:>10}{:>25}{:>20}{:>16}'.format('Title','Description','Priority','Date')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur14.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>25}{:>17}{:>26}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+                
+                print('++++++++++++++++++++++++++++++++++ \n')
 
         if inp == '3':
             inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
