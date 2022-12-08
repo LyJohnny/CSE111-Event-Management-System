@@ -124,6 +124,27 @@ def eventManagement(_conn):
                 _conn.commit()
                 continue
 
+            if inp1 == '4':
+                inp2 = input('Enter the Group type you wish to filter your Events by: ')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur12 = _conn.cursor()
+                sql = '''
+                        SELECT e_title, e_description, e_location, e_attendee FROM Events INNER JOIN Groups on Groups.g_id = Events.e_groupid WHERE Groups.g_type = ? AND Events.e_userid = ?
+                        ''' 
+                cur12.execute(sql, [inp2, currentUserID]) 
+                l = '{:>10}{:>23}{:>28}{:>22}'.format('Title','Description','Location','Attendee')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur12.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+                
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
+
         if inp == '2':
             inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: ')
             print('++++++++++++++++++++++++++++++++++ \n')
