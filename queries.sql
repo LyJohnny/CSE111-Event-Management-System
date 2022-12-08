@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS Meetings (
 ); 
 
 CREATE TABLE IF NOT EXISTS Users (
-    u_id INTEGER NOT NULL,
+    u_id INTEGER PRIMARY KEY AUTOINCREMENT,
     u_firstname VARCHAR(255) NOT NULL,
     u_lastname VARCHAR(255) NOT NULL,
-    u_email VARCHAR(255) NOT NULL,
+    u_email text NOT NULL,
     u_isactive BOOLEAN NOT NULL
 );
 
@@ -145,16 +145,16 @@ INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Karaoke Nig
 INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Interview Prep Workshop', 'Jessica', 6, 'HUWA39');
 INSERT INTO Meetings(m_title, m_attendee, m_userid, m_link) VALUES ('Human Bingo', 'Britney', 6, 'MFIG25');
 
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('1', 'Jack', 'Harlow', 'jharlow69@gmail.com', TRUE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('2', 'Travis', 'Scott', 'travvypatty420@yahoo.com', TRUE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('3', 'Drizzy', 'Drake', 'loverboy2000@gmail.com', TRUE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('4', '21', 'Savage', 'savage21@yahoo.com', FALSE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('5', 'Ye', 'West', 'kwest420@gmail.com', FALSE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('6', 'Lebron', 'James', 'lemickey3000@gmail.com', TRUE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('7', 'Barack', 'Obama', 'bobama420@gmail.com', FALSE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('8', 'George', 'Bush', 'gbush2008@yahoo.com', TRUE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('9', 'Dua', 'Lipa', 'dualipareal@gmail.com', FALSE);
-INSERT INTO Users(u_id, u_firstname, u_lastname, u_email, u_isactive ) VALUES ('10', 'Andrew', 'Tate', 'andrewt420@gmail.com', FALSE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Jack', 'Harlow', 'jharlow69@gmail.com', TRUE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Travis', 'Scott', 'travvypatty420@yahoo.com', TRUE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Drizzy', 'Drake', 'loverboy2000@gmail.com', TRUE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('21', 'Savage', 'savage21@yahoo.com', FALSE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Ye', 'West', 'kwest420@gmail.com', FALSE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Lebron', 'James', 'lemickey3000@gmail.com', TRUE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Barack', 'Obama', 'bobama420@gmail.com', FALSE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('George', 'Bush', 'gbush2008@yahoo.com', TRUE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Dua', 'Lipa', 'dualipareal@gmail.com', FALSE);
+INSERT INTO Users(u_firstname, u_lastname, u_email, u_isactive ) VALUES ('Andrew', 'Tate', 'andrewt420@gmail.com', FALSE);
 
 INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Lunch With Bob', FALSE, TRUE, FALSE);
 INSERT INTO Status(s_title, s_draft, s_open, s_ongoing) VALUES ('Coffee With Bruce', FALSE, FALSE, TRUE);
