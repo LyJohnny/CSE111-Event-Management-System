@@ -103,15 +103,20 @@ def eventManagement(_conn):
 
                 continue
 
-            if inp == '2':
+            if inp1 == '2':
+                inp2 = input('Enter the Event title you wish to update: ')
+                inp3 = input('Enter the updated Event title: ')
+                print('\n')
                 cur1 = _conn.cursor()
                 cur1.execute("""
-                        SELECT r_title FROM Reminders WHERE r_userid = ?
-                        """, (currentUserID))
+                        UPDATE Events SET e_title = ? WHERE e_title = ?
+                        """, [inp3, inp2])
                 _conn.commit()
+                print('Event: ', inp2, 'has been updated')
+                print('\n')
                 continue
 
-            if inp == '3':
+            if inp1 == '3':
                 cur2 = _conn.cursor()
                 cur2.execute("""
                         SELECT m_title FROM Meetings WHERE m_userid = ?
