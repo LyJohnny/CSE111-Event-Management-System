@@ -112,7 +112,7 @@ def eventManagement(_conn):
                         UPDATE Events SET e_title = ? WHERE e_title = ?
                         """, [inp3, inp2])
                 _conn.commit()
-                print('Event: ', inp2, 'has been updated to: ', inp3)
+                print('Event:', inp2, 'has been updated to:', inp3)
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
@@ -153,7 +153,7 @@ def eventManagement(_conn):
                         UPDATE Reminders SET r_title = ? WHERE r_title = ?
                         """, [inp3, inp1])
                 _conn.commit()
-                print('Event: ', inp1, 'has been updated to: ', inp3)
+                print('Reminder:', inp1, 'has been updated to:', inp3)
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
@@ -187,13 +187,18 @@ def eventManagement(_conn):
                 continue
 
             if inp3 == '2':
+                inp1 = input('Enter the Meeting title you wish to update: ')
+                inp2 = input('Enter the updated Meeting title: ')
+                print('\n')
                 cur7 = _conn.cursor()
                 cur7.execute("""
-                        SELECT r_title FROM Meetings WHERE r_userid = ?
-                        """, (currentUserID))
+                        UPDATE Meetings SET m_title = ? WHERE m_title = ?
+                        """, [inp2, inp1])
                 _conn.commit()
+                print('Meeting:', inp1, 'has been updated to:', inp2)
+                print('++++++++++++++++++++++++++++++++++ \n')
                 continue
-
+                
             if inp3 == '3':
                 cur8 = _conn.cursor()
                 cur8.execute("""
@@ -203,7 +208,7 @@ def eventManagement(_conn):
                 continue
 
         if inp == '4':
-            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups: \n')
+            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             if inp4 == '1':
                 cur9 = _conn.cursor()
@@ -223,11 +228,16 @@ def eventManagement(_conn):
                 continue
 
             if inp4 == '2':
+                inp1 = input('Enter the Group title you wish to update: ')
+                inp2 = input('Enter the updated Group title: ')
+                print('\n')
                 cur10 = _conn.cursor()
                 cur10.execute("""
-                        SELECT r_title FROM Meetings WHERE r_userid = ?
-                        """, (currentUserID))
+                        UPDATE Groups SET g_title = ? WHERE g_title = ?
+                        """, [inp2, inp1])
                 _conn.commit()
+                print('Group:', inp1, 'has been updated to:', inp2)
+                print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
             if inp4 == '3':
