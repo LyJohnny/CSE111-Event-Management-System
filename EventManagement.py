@@ -273,7 +273,7 @@ def eventManagement(_conn):
             # -----------------------------------------------------Meetings (inp3) --------------------------------------------------------------#
 
         if inp == '3':
-            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
+            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings, Enter 4 to add a Meeting: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             cur6 = _conn.cursor()
             if inp3 == '1':
@@ -314,10 +314,29 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Meeting: ', delMtng)
                 continue
+
+            if inp3 == '4':
+                title = input('Enter the Meeting title: \n')
+                attend = input('Enter the Meeting Attendee: \n')
+                link = input('Enter the Meeting Link: \n')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur17 = _conn.cursor()
+                sql = '''
+                        INSERT INTO Meetings (m_title, m_attendee, m_userid, m_link)
+                        VALUES(?,?,?,?)
+                        ''' 
+                cur17.execute(sql, [title, attend, currentUserID, link]) 
+                _conn.commit()
+                print('New Meeting titled:',title, 'created successfully!')
+
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
             # -----------------------------------------------------Groups (inp4) --------------------------------------------------------------#
 
         if inp == '4':
-            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups: ')
+            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups, Enter 4 to add Groups: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             if inp4 == '1':
                 cur9 = _conn.cursor()
@@ -358,6 +377,24 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Group: ', delGrp)
                 continue
+
+            if inp4 == '4':
+                title = input('Enter the Group title: \n')
+                typeG = input('Enter the Group type: \n')
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur18 = _conn.cursor()
+                sql = '''
+                        INSERT INTO Groups (g_title, g_type)
+                        VALUES(?,?)
+                        ''' 
+                cur18.execute(sql, [title, typeG]) 
+                _conn.commit()
+                print('New Group titled:',title, 'created successfully!')
+
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
 
 def main():
     database = r"project.sqlite"
