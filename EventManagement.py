@@ -85,7 +85,7 @@ def eventManagement(_conn):
             quit()
             # -----------------------------------------------------Events (inp1) --------------------------------------------------------------#
         if inp == '1':
-            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group, Enter 5 to add Events: ')
+            inp1 = input('Enter 1 to view all Events, Enter 2 to edit Events, Enter 3 to delete Events, Enter 4 to filter Events by Group, Enter 5 to add Events, Enter 6 to filter active Events : ')
             print('++++++++++++++++++++++++++++++++++ \n')
             if inp1 == '1':
                 cur.execute("""
@@ -99,7 +99,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
 
                 continue
@@ -142,7 +142,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
 
                 continue
@@ -167,6 +167,27 @@ def eventManagement(_conn):
 
                 continue
 
+            if inp1 == '6':
+                print('++++++++++++++++++++++++++++++++++ \n')
+                cur16 = _conn.cursor()
+                sql = '''
+                        SELECT e_title, e_description, e_location, e_attendee FROM Events INNER JOIN Status on Events.e_title = Status.s_title WHERE Status.s_ongoing = 1 AND Events.e_userid = ?
+                        ''' 
+                cur16.execute(sql, [currentUserID]) 
+                l = '{:>10}{:>23}{:>28}{:>22}'.format('Title','Description','Location','Attendee')
+                print(l)
+                print('-------------------------------------------------------------------------------------')
+                rows = cur16.fetchall()
+                for row in rows:
+                    l = '{:>10}{:>30}{:>25}{:>16}'.format(row[0],row[1],row[2],row[3])
+                    print(l)
+
+                print('++++++++++++++++++++++++++++++++++ \n')
+
+                continue
+
+
+
 
         if inp == '2':
             inp2 = input('Enter 1 to view all Reminders, Enter 2 to edit Reminders, Enter 3 to delete Reminders, Enter 4 to filter Reminders by Priority: ')
@@ -184,7 +205,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>25}{:>25}{:>14}'.format(row[0],row[1],row[2],row[3])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
@@ -226,7 +247,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>25}{:>17}{:>26}'.format(row[0],row[1],row[2],row[3])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
 
         if inp == '3':
@@ -245,7 +266,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>30}{:>25}'.format(row[0],row[1],row[2])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
@@ -261,7 +282,7 @@ def eventManagement(_conn):
                 print('Meeting:', inp1, 'has been updated to:', inp2)
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
-                
+
             if inp3 == '3':
                 delMtng = input('Enter the title of the Meeting you wish to delete: ')
                 cur8 = _conn.cursor()
@@ -289,7 +310,7 @@ def eventManagement(_conn):
                 for row in rows:
                     l = '{:>10}{:>30}'.format(row[0],row[1])
                     print(l)
-                
+
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
