@@ -112,6 +112,8 @@ def eventManagement(_conn):
 
                 if inp4 == 'Title':
                     cur1 = _conn.cursor()
+                    cur2 = _conn.cursor()
+
                     edTitle = input('Enter the updated Event title: ')
                     sql1 = """ 
                     UPDATE Events SET e_title = ? WHERE e_title = ?
@@ -119,6 +121,14 @@ def eventManagement(_conn):
                     """
                     cur1.execute(sql1,[edTitle, inp2])
                     _conn.commit()
+
+                    sql2 = """ 
+                     UPDATE Status SET s_title = ? WHERE s_title = ?
+
+                     """
+                    cur2.execute(sql2,[edTitle, inp2])
+                    _conn.commit()
+
                     print('Event:', inp2, 'has updated', inp4, 'to:', edTitle)
                     print('++++++++++++++++++++++++++++++++++ \n')
                 if inp4 == 'Description':
