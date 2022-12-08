@@ -238,7 +238,7 @@ def eventManagement(_conn):
             cur3 = _conn.cursor()
             if inp2 == '1':
                 cur3.execute("""
-                        SELECT r_title, r_description, r_date, r_priority FROM Reminders WHERE r_userid = ?
+                        SELECT r_title, r_description, r_priority, r_date FROM Reminders WHERE r_userid = ?
                         """, (currentUserID,)) 
                 _conn.commit()
                 l = '{:>10}{:>25}{:>25}{:>16}'.format('Title','Description','Priority','Date')
@@ -246,27 +246,68 @@ def eventManagement(_conn):
                 print('-------------------------------------------------------------------------------------')
                 rows = cur3.fetchall()
                 for row in rows:
-                    l = '{:>10}{:>25}{:>25}{:>14}'.format(row[0],row[1],row[2],row[3])
+                    l = '{:>10}{:>25}{:>14}{:>34}'.format(row[0],row[1],row[2],row[3])
                     print(l)
 
                 print('++++++++++++++++++++++++++++++++++ \n')
                 continue
 
             if inp2 == '2':
-                inp1 = input('Enter the Reminder title you wish to update: ')
-                inp3 = input('Enter the updated Reminder title: ')
-                print('\n')
-                cur4 = _conn.cursor()
-                cur4.execute("""
-                        UPDATE Reminders SET r_title = ? WHERE r_title = ?
-                        """, [inp3, inp1])
-                _conn.commit()
-                print('Reminder:', inp1, 'has been updated to:', inp3)
-                print('++++++++++++++++++++++++++++++++++ \n')
+                inp2 = input('Enter the Reminder you wish to update: ')
+                inp4 = input('Enter the table you want to edit (Title, Description, Priority, Date): ')
+                # print('\n')
+
+                if inp4 == 'Title':
+                    cur1 = _conn.cursor()
+                    edTitle = input('Enter the updated Reminder title: ')
+                    sql1 = """ 
+                    UPDATE Reminders SET r_title = ? WHERE r_title = ?
+
+                    """
+                    cur1.execute(sql1,[edTitle, inp2])
+                    _conn.commit()
+                    print('Reminder:', inp2, 'has updated', inp4, 'to:', edTitle)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+                if inp4 == 'Description':
+                    cur2 = _conn.cursor()
+                    edDesc = input('Enter the updated description: ')
+                    sql2 = """ 
+                    UPDATE Reminders SET r_description = ? WHERE r_title = ?
+
+                    """
+                    cur2.execute(sql2,[edDesc, inp2])
+                    _conn.commit()
+                    print('Reminder:', inp2, 'has updated', inp4, 'to:', edDesc)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+
+                if inp4 == 'Priority':
+                    cur3 = _conn.cursor()
+                    edPriority = input('Enter the updated Reminder priority: ')
+                    sql3 = """ 
+                    UPDATE Reminders SET r_priority = ? WHERE r_title = ?
+
+                    """
+                    cur3.execute(sql3,[edPriority, inp2])
+                    _conn.commit()
+                    print('Reminder:', inp2, 'has updated', inp4, 'to:', edLocation)
+                    print('++++++++++++++++++++++++++++++++++ \n')    
+
+                if inp4 == 'Date':
+                    cur4 = _conn.cursor()
+                    edDate = input('Enter the updated Reminder date: ')
+                    sql4 = """ 
+                    UPDATE Events SET r_date = ? WHERE r_title = ?
+
+                    """
+                    cur4.execute(sql4,[edDate, inp2])
+                    _conn.commit()
+                    print('Reminder:', inp2, 'has updated', inp4, 'to:', edDate)
+                    print('++++++++++++++++++++++++++++++++++ \n')        
+  
                 continue
 
             if inp2 == '3':
-                delRmdr = input('Enter the tilte of the Reminder you wish to delete: ')
+                delRmdr = input('Enter the title of the Reminder you wish to delete: ')
                 cur5 = _conn.cursor()
                 cur5.execute("""
                         DELETE FROM Reminders WHERE r_title = ? AND r_userid = ?
@@ -315,7 +356,7 @@ def eventManagement(_conn):
             # -----------------------------------------------------Meetings (inp3) --------------------------------------------------------------#
 
         if inp == '3':
-            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings: ')
+            inp3 = input('Enter 1 to view all Meetings, Enter 2 to edit Meetings, Enter 3 to delete Meetings, Enter 4 to add a Meeting: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             cur6 = _conn.cursor()
             if inp3 == '1':
@@ -335,16 +376,45 @@ def eventManagement(_conn):
                 continue
 
             if inp3 == '2':
-                inp1 = input('Enter the Meeting title you wish to update: ')
-                inp2 = input('Enter the updated Meeting title: ')
-                print('\n')
-                cur7 = _conn.cursor()
-                cur7.execute("""
-                        UPDATE Meetings SET m_title = ? WHERE m_title = ?
-                        """, [inp2, inp1])
-                _conn.commit()
-                print('Meeting:', inp1, 'has been updated to:', inp2)
-                print('++++++++++++++++++++++++++++++++++ \n')
+                inp2 = input('Enter the Meeting you wish to update: ')
+                inp4 = input('Enter the table you want to edit (Title, Attendee, Link): ')
+                # print('\n')
+
+                if inp4 == 'Title':
+                    cur1 = _conn.cursor()
+                    edTitle = input('Enter the updated Meeting title: ')
+                    sql1 = """ 
+                    UPDATE Meetings SET m_title = ? WHERE m_title = ?
+
+                    """
+                    cur1.execute(sql1,[edTitle, inp2])
+                    _conn.commit()
+                    print('Meeting:', inp2, 'has updated', inp4, 'to:', edTitle)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+                if inp4 == 'Attendee':
+                    cur2 = _conn.cursor()
+                    edAttendee = input('Enter the updated attendee: ')
+                    sql2 = """ 
+                    UPDATE Meetings SET m_attendee = ? WHERE m_title = ?
+
+                    """
+                    cur2.execute(sql2,[edAttendee, inp2])
+                    _conn.commit()
+                    print('Meeting:', inp2, 'has updated', inp4, 'to:', edAttendee)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+
+                if inp4 == 'Link':
+                    cur3 = _conn.cursor()
+                    edLink = input('Enter the updated Meeting Link: ')
+                    sql3 = """ 
+                    UPDATE Meetings SET m_link = ? WHERE m_title = ?
+
+                    """
+                    cur3.execute(sql3,[edLink, inp2])
+                    _conn.commit()
+                    print('Meeting:', inp2, 'has updated', inp4, 'to:', edLink)
+                    print('++++++++++++++++++++++++++++++++++ \n')    
+
                 continue
 
             if inp3 == '3':
@@ -356,10 +426,28 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Meeting: ', delMtng)
                 continue
+
+            if inp3 == '4':
+                 title = input('Enter the Meeting title: \n')
+                 attend = input('Enter the Meeting Attendee: \n')
+                 link = input('Enter the Meeting Link: \n')
+                 print('++++++++++++++++++++++++++++++++++ \n')
+                 cur17 = _conn.cursor()
+                 sql = '''
+                         INSERT INTO Meetings (m_title, m_attendee, m_userid, m_link)
+                         VALUES(?,?,?,?)
+                         ''' 
+                 cur17.execute(sql, [title, attend, currentUserID, link]) 
+                 _conn.commit()
+                 print('New Meeting titled:',title, 'created successfully!')
+
+                 print('++++++++++++++++++++++++++++++++++ \n')
+
+                 continue 
             # -----------------------------------------------------Groups (inp4) --------------------------------------------------------------#
 
         if inp == '4':
-            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups: ')
+            inp4 = input('Enter 1 to view all Groups, Enter 2 to edit Groups, Enter 3 to delete Groups, Enter 4 to add Groups: ')
             print('++++++++++++++++++++++++++++++++++ \n')
             if inp4 == '1':
                 cur9 = _conn.cursor()
@@ -379,17 +467,34 @@ def eventManagement(_conn):
                 continue
 
             if inp4 == '2':
-                inp1 = input('Enter the Group title you wish to update: ')
-                inp2 = input('Enter the updated Group title: ')
-                print('\n')
-                cur10 = _conn.cursor()
-                cur10.execute("""
-                        UPDATE Groups SET g_title = ? WHERE g_title = ?
-                        """, [inp2, inp1])
-                _conn.commit()
-                print('Group:', inp1, 'has been updated to:', inp2)
-                print('++++++++++++++++++++++++++++++++++ \n')
-                continue
+                inp2 = input('Enter the Group you wish to update: ')
+                inp4 = input('Enter the table you want to edit (Title, Type): ')
+                # print('\n')
+
+                if inp4 == 'Title':
+                    cur1 = _conn.cursor()
+                    edTitle = input('Enter the updated Group title: ')
+                    sql1 = """ 
+                    UPDATE Groups SET g_title = ? WHERE g_title = ?
+
+                    """
+                    cur1.execute(sql1,[edTitle, inp2])
+                    _conn.commit()
+                    print('Group:', inp2, 'has updated', inp4, 'to:', edTitle)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+                if inp4 == 'Type':
+                    cur2 = _conn.cursor()
+                    edType = input('Enter the updated Group Type: ')
+                    sql2 = """ 
+                    UPDATE Groups SET g_type = ? WHERE g_title = ?
+
+                    """
+                    cur2.execute(sql2,[edType, inp2])
+                    _conn.commit()
+                    print('Group:', inp2, 'has updated', inp4, 'to:', edType)
+                    print('++++++++++++++++++++++++++++++++++ \n')
+                    
+                    continue
 
             if inp4 == '3':
                 delGrp = input('Enter the title of the Meeting you wish to delete: ')
@@ -400,6 +505,23 @@ def eventManagement(_conn):
                 _conn.commit()
                 print('You have successfully deleted Group: ', delGrp)
                 continue
+
+            if inp4 == '4':
+                 title = input('Enter the Group title: \n')
+                 typeG = input('Enter the Group type: \n')
+                 print('++++++++++++++++++++++++++++++++++ \n')
+                 cur18 = _conn.cursor()
+                 sql = '''
+                         INSERT INTO Groups (g_title, g_type)
+                         VALUES(?,?)
+                         ''' 
+                 cur18.execute(sql, [title, typeG]) 
+                 _conn.commit()
+                 print('New Group titled:',title, 'created successfully!')
+
+                 print('++++++++++++++++++++++++++++++++++ \n')
+
+                 continue            
 
 def main():
     database = r"project.sqlite"
