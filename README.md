@@ -10,9 +10,9 @@ In the project directory, you can run:
 
 
 Users can:
-◆ Create an account/login with an email
-◆ View, Edit, Add, and Delete events, reminders,
+- Create an account/login with an email
+- View, Edit, Add, and Delete events, reminders,
 meetings, groups and their respective tuples
-◆ Filter events by groups
+- Filter events by groups
 
   
